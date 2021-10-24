@@ -1,19 +1,20 @@
 # Predict activity quality from activity monitors
 
+
 ##Synopsis
 
-Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways.
+Using devices such as Jawbone-Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in five different ways.
 
 The goal of this project is to predict the manner in which they did the exercise. This is the `classe` variable in the training set.
 
 ## Data description
 
-The outcome variable is `classe`, a factor variable with 5 levels. For this data set, participants were asked to perform one set of 10 repetitions of the Unilateral Dumbbell Biceps Curl in 5 different fashions:
+The outcome variable is `classe`, a factor variable with Five levels. For this data set, the participants were asked to perform one set of 10 repetitions of the Unilateral Dumbbell Biceps Curl in five different fashions:
 
 - exactly according to the specification (Class A)
-- throwing the elbows to the front (Class B)
-- lifting the dumbbell only halfway (Class C)
-- lowering the dumbbell only halfway (Class D)
+- throwing the elbows forward (Class B)
+- lifting the dumbbell halfway through (Class C)
+- lowering the dumbbell halfway through (Class D)
 - throwing the hips to the front (Class E)
 
 ## Initial configuration
@@ -98,7 +99,7 @@ set.seed(9999)
 ```
 
 ## Data processing
-In this section the data is downloaded and processed. Some basic transformations and cleanup will be performed, so that `NA` values are omitted. Irrelevant columns such as `user_name`, `raw_timestamp_part_1`, `raw_timestamp_part_2`, `cvtd_timestamp`, `new_window`, and  `num_window` (columns 1 to 7) will be removed in the subset.
+In this section the data is downloaded and processed. Some basic transformations and cleanup is performed, so that `NA` values are omitted. Irrelevant columns such as `user_name`, `raw_timestamp_part_1`, `raw_timestamp_part_2`, `cvtd_timestamp`, `new_window`, &  `num_window` (columns 1 to 7) will be removed from the subset.
 
 The `pml-training.csv` data is used to devise training and testing sets.
 The `pml-test.csv` data is used to predict and answer the 20 questions based on the trained model.
@@ -163,7 +164,7 @@ rpart.plot(modFitDT, main="Classification Tree", extra=102, under=TRUE, faclen=0
 
 ![](Practical_ML_Course_Project_files/figure-html/decisiontree-1.png) 
 
-Following confusion matrix shows the errors of the prediction algorithm.
+The following confusion matrix shows the errors of the prediction algorithm:
 
 
 ```r
@@ -214,7 +215,7 @@ modFitRF <- randomForest(classe ~ ., data=subTraining, method="class")
 predictRF <- predict(modFitRF, subTesting, type = "class")
 ```
 
-Following confusion matrix shows the errors of the prediction algorithm.
+The following confusion matrix shows the errors of the prediction algorithm:
 
 
 ```r
@@ -257,7 +258,7 @@ confusionMatrix(predictRF, subTesting$classe)
 
 ## Conclusion
 
-### Result
+### Result of the project
 
 The confusion matrices show, that the Random Forest algorithm performens better than decision trees. The accuracy for the Random Forest model was 0.995 (95% CI: (0.993, 0.997)) compared to 0.739 (95% CI: (0.727, 0.752)) for Decision Tree model. The random Forest model is choosen.
 
@@ -265,7 +266,7 @@ The confusion matrices show, that the Random Forest algorithm performens better 
 The expected out-of-sample error is estimated at 0.005, or 0.5%. The expected out-of-sample error is calculated as 1 - accuracy for predictions made against the cross-validation set. Our Test data set comprises 20 cases. With an accuracy above 99% on our cross-validation data, we can expect that very few, or none, of the test samples will be missclassified.
 
 ## Submission
-In this section the files for the project submission are generated using the random forest algorithm on the testing data.
+The files for the project submission are generated using the random forest algorithm on the testing data, in this section:
 
 
 ```r
